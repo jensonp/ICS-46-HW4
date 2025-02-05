@@ -78,7 +78,7 @@ void insert_all_words(int K, string file_name, Holder& L){
     cout << "\t\tI = " << eTime << endl; 
     
     // experimental
-    all_words(L.name, eTime, 'i');
+    //all_words(L.name, eTime, 'i');
     //auto it = times.find(L.name);
     //if(it != times.end()) it->second.first->push_back(eTime);
 }
@@ -94,7 +94,7 @@ void remove_all_words(int K, string file_name, Holder& L){
     in.close();
     cout << "\t\tI = " << eTime << endl;
     // experimental
-    all_words(L.name, eTime, 'r');
+    //all_words(L.name, eTime, 'r');
     //auto it = times.find(L.name);
     //if(it != times.end()) it->second.second->push_back(eTime);
 
