@@ -15,16 +15,26 @@ void ArrayStack::push(const string & word){buf[size++] = word;}
 void ArrayStack::pop(){--size;}
 
 // AQ
-ArrayQueue::ArrayQueue(int cap):Queue("ArrayQueue"),capacity(cap), front(0), rear(0), buf(new string[cap]){}
+ArrayQueue::ArrayQueue(int cap):Queue("ArrayQueue"),capacity(cap), front(0), rear(0), buf(new string[cap+1]){}
 ArrayQueue::~ArrayQueue(){delete [] buf;}
+void ArrayQueue::enq(const string & word){
+    if (is_full()) {return;}
+    buf[rear] = word;
+    rear = (rear + 1) % (capacity+1);
+}
+void ArrayQueue::deq(){ 
+    if (is_empty()) {return;}
+    front = (front + 1) % (capacity + 1); 
+    }
 string ArrayQueue::next(){return buf[front];}
 bool ArrayQueue::is_empty(){return front==rear;}
-bool ArrayQueue::is_full(){return (rear+1)%capacity==front;}
+bool ArrayQueue::is_full(){return ((rear + 1) % (capacity + 1) == front)}
 
-void ArrayQueue::enq(const string& word){ buf[rear]=word; rear=(rear+1)%capacity;}
-void ArrayQueue::deq(){ front=(front+1)%capacity; }
 void ArrayQueue::print(ostream & out){
-    int i=front; for(; i != rear; i=(i+1)%capacity){out<<buf[i]<<" ";} }
+    for (int i = front; i != rear; i = (i + 1) % (capacity + 1)) {
+    out << buf[i] << " ";
+}
+}
 
 // LS
 LinkedStack::LinkedStack():Stack("LinkedStack"),head(nullptr){}
