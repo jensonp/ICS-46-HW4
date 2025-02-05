@@ -7,12 +7,22 @@ ArrayStack::~ArrayStack(){delete [] buf;}
 
 void ArrayStack::print(ostream& out){
     for(int i=size-1; i>=0; --i){out<<buf[i]<<" ";}}
-string ArrayStack::top(){return buf[size-1];}
+string ArrayStack::top(){
+    if (is_empty()) {
+    error("", "top() on empty stack");
+    return "";
+}
+    return buf[size-1];}
 bool ArrayStack::is_empty(){return size==0;}
 bool ArrayStack::is_full(){return size==capacity;}
 
 void ArrayStack::push(const string & word){buf[size++] = word;}
-void ArrayStack::pop(){--size;}
+void ArrayStack::pop(){
+    if (is_empty()) {
+    error("", "pop() on empty stack");
+    return; // or do nothing else, or throw
+}
+    --size;}
 
 // AQ
 ArrayQueue::ArrayQueue(int cap):Queue("ArrayQueue"),capacity(cap), front(0), rear(0), buf(new string[cap+1]){}
@@ -23,10 +33,14 @@ void ArrayQueue::enq(const string & word){
     rear = (rear + 1) % (capacity+1);
 }
 void ArrayQueue::deq(){ 
-    if (is_empty()) {return;}
+    if (is_empty()) { error("", "deq() on empty queue"); return;}
     front = (front + 1) % (capacity + 1); 
     }
-string ArrayQueue::next(){return buf[front];}
+string ArrayQueue::next(){
+    if (is_empty()) {
+    error("", "next() on empty queue");
+    return ""; }
+    return buf[front];}
 bool ArrayQueue::is_empty(){return front==rear;}
 bool ArrayQueue::is_full(){return ((rear + 1) % (capacity + 1) == front);}
 
@@ -49,13 +63,19 @@ void ListNode::print(ostream& out, ListNode* L){for(ListNode* p=L;p!=nullptr;p=p
 void LinkedStack::print(ostream& out){ListNode::print(out, head);}
 
 void LinkedStack::push(const string& word){head = new ListNode(word, head);}
-void LinkedStack::pop(){if(LinkedStack::is_empty()) return; ListNode* temp=head; head=head->next; delete temp;}
-
+void LinkedStack::pop(){
+    if(LinkedStack::is_empty())
+    {error("", "pop() on empty stack"); return;}
+    ListNode* temp=head; head=head->next; delete temp;}
 
 // LQ
 LinkedQueue::LinkedQueue(): Queue("LinkedQueue"),head(nullptr), tail(nullptr){}
 
-string LinkedQueue::next(){return head->data;}
+string LinkedQueue::next(){
+    if (LinkedQueue::is_empty()) {
+    error("", "next() on empty queue");
+    return ""; }
+    return head->data;}
 bool LinkedQueue::is_empty(){return head==nullptr && tail==nullptr;}
 bool LinkedQueue::is_full(){return false;}
 void LinkedQueue::print(ostream & out){ListNode::print(out, head); }
@@ -64,9 +84,11 @@ LinkedQueue::~LinkedQueue(){ ListNode::delete_list(head); }
 void LinkedQueue::enq(const string & word){
     ListNode* temp = new ListNode(word, nullptr);
     if(is_empty()){head=tail=temp;}
-    else{tail->next=temp; temp->next=head; tail=temp;}}
+    else{
+    tail->next=temp;  
+    tail=temp;}}
 void LinkedQueue::deq(){
-    if(is_empty()) return;
+    if(LinkedQueue::is_empty()){ error("", "deq() on empty queue"); return;}
     ListNode *temp = head;
     if(head==tail){head=tail=nullptr;}
     else{head=head->next;}
