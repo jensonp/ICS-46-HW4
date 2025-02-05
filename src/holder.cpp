@@ -23,7 +23,7 @@ bool ArrayQueue::is_full(){return (rear+1)%capacity==front;}
 
 void ArrayQueue::enq(const string& word){ buf[rear]=word; rear=(rear+1)%capacity;}
 void ArrayQueue::deq(){ front=(front+1)%capacity; }
-void ArrayQueue::print(ostream & out){int i=front; for(; i != rear; i=(i+1)%capacity){out<<buf[i]<<" ";} out << "\n";}
+void ArrayQueue::print(ostream & out){int i=front; for(; i != rear; i=(i+1)%capacity){out<<buf[i]<<" ";} }
 
 // LS
 LinkedStack::LinkedStack():Stack("LinkedStack"),head(nullptr){}
@@ -34,7 +34,7 @@ LinkedStack::~LinkedStack(){ListNode::delete_list(head);}
 string LinkedStack::top(){return head->data;}
 bool LinkedStack::is_empty(){return head==nullptr;}
 bool LinkedStack::is_full(){return false;}
-void ListNode::print(ostream& out, ListNode* L){for(ListNode* p=L;p!=nullptr;p=p->next){out<<p->data<<" ";} out << "\n";}
+void ListNode::print(ostream& out, ListNode* L){for(ListNode* p=L;p!=nullptr;p=p->next){out<<p->data<<" ";} }
 void LinkedStack::print(ostream& out){ListNode::print(out, head);}
 
 void LinkedStack::push(const string& word){head = new ListNode(word, head);}
@@ -76,11 +76,7 @@ void insert_all_words(int K, string file_name, Holder& L){
     t.elapsedUserTime(eTime);
     in.close();
     cout << "\t\tI = " << eTime << endl; 
-    
-    // experimental
     //all_words(L.name, eTime, 'i');
-    //auto it = times.find(L.name);
-    //if(it != times.end()) it->second.first->push_back(eTime);
 }
 
 void remove_all_words(int K, string file_name, Holder& L){
@@ -93,10 +89,8 @@ void remove_all_words(int K, string file_name, Holder& L){
     t.elapsedUserTime(eTime);
     in.close();
     cout << "\t\tI = " << eTime << endl;
-    // experimental
     //all_words(L.name, eTime, 'r');
-    //auto it = times.find(L.name);
-    //if(it != times.end()) it->second.second->push_back(eTime);
+    
 
     
     }
