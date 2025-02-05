@@ -28,7 +28,7 @@ void ArrayQueue::deq(){
     }
 string ArrayQueue::next(){return buf[front];}
 bool ArrayQueue::is_empty(){return front==rear;}
-bool ArrayQueue::is_full(){return ((rear + 1) % (capacity + 1) == front)}
+bool ArrayQueue::is_full(){return ((rear + 1) % (capacity + 1) == front);}
 
 void ArrayQueue::print(ostream & out){
     for (int i = front; i != rear; i = (i + 1) % (capacity + 1)) {
