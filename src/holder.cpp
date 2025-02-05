@@ -5,7 +5,8 @@ ostream& operator << (ostream & out, Stack & L){L.print(out); return out;}
 ArrayStack::ArrayStack(int cap):Stack("ArrayStack"), capacity(cap), size(0), buf(new string[cap]){}
 ArrayStack::~ArrayStack(){delete [] buf;}
 
-void ArrayStack::print(ostream& out){for(int i=0; i<size; ++i){out<<buf[i]<<"\n";}}
+void ArrayStack::print(ostream& out){
+    for(int i=size-1; i>=0; --i){out<<buf[i]<<" ";} out<<"\n";}
 string ArrayStack::top(){return buf[size-1];}
 bool ArrayStack::is_empty(){return size==0;}
 bool ArrayStack::is_full(){return size==capacity;}
@@ -22,7 +23,7 @@ bool ArrayQueue::is_full(){return (rear+1)%capacity==front;}
 
 void ArrayQueue::enq(const string& word){ buf[rear]=word; rear=(rear+1)%capacity;}
 void ArrayQueue::deq(){ front=(front+1)%capacity; }
-void ArrayQueue::print(ostream & out){int i=front; for(; i!=rear; i=(i+1)%capacity){out<<buf[i]<<"\n";}}
+void ArrayQueue::print(ostream & out){int i=front; for(; i != rear; i=(i+1)%capacity){out<<buf[i]<<" ";} out << "\n";}
 
 // LS
 LinkedStack::LinkedStack():Stack("LinkedStack"),head(nullptr){}
@@ -33,7 +34,7 @@ LinkedStack::~LinkedStack(){ListNode::delete_list(head);}
 string LinkedStack::top(){return head->data;}
 bool LinkedStack::is_empty(){return head==nullptr;}
 bool LinkedStack::is_full(){return false;}
-void ListNode::print(ostream& out, ListNode* L){for(;L!=nullptr;L=L->next){out<<L->data<<"\n";}}
+void ListNode::print(ostream& out, ListNode* L){for(ListNode* p=L;p!=nullptr;p=p->next){out<<p->data<<" ";} out << "\n";}
 void LinkedStack::print(ostream& out){ListNode::print(out, head);}
 
 void LinkedStack::push(const string& word){head = new ListNode(word, head);}
