@@ -38,4 +38,3 @@ int main(int argc, char** argv) {
   __asan_set_error_report_callback(asan_report_callback);
   return RUN_ALL_TESTS();
 }
-
