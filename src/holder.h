@@ -1,6 +1,10 @@
+#pragma once
 #include <iostream>
+#include <string>
+#include "../src/Timer.h"
+#include "../src/copy_csv.h"
 using namespace std;
-
+    
 // constexpr int NWORDS = 45;
 constexpr int NWORDS = 45392;
 
@@ -47,7 +51,7 @@ struct Queue
     virtual string peek() { return next(); }
 };
 
-ostream & operator << (ostream & out, Stack & L);
+ostream& operator<<(ostream & out, Stack & L);
 
 class ArrayStack
     : public Stack
@@ -69,7 +73,7 @@ public:
 
 struct ListNode {
     string data;
-    ListNode * next;
+    ListNode* next;
     ListNode(string new_data, ListNode * new_next)
         : data(new_data), next(new_next) { }
     static void print(ostream & out, ListNode * L);
@@ -80,8 +84,7 @@ class LinkedStack
     : public Stack
 {
 
-    ListNode * head;
-
+    ListNode* head;
 public:
     LinkedStack();
     void push(const string & word);
@@ -113,7 +116,7 @@ public:
 class LinkedQueue
     : public Queue
 {
-    ListNode * head, * tail;
+    ListNode *head, *tail;
 public:
     LinkedQueue();
     void enq(const string & word);
